@@ -1,6 +1,8 @@
 import 'package:evently/firebase/firebase_manager.dart';
 import 'package:evently/login/login_screen.dart';
+import 'package:evently/providers/AuthProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
@@ -9,6 +11,7 @@ class ProfileTab extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var authProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -45,7 +48,7 @@ class ProfileTab extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Marco Mina',
+                      "${authProvider.userModel?.name}",
                       style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: Theme.of(context).scaffoldBackgroundColor,
                           fontSize: 24,

@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evently/widgets/language_toggle_widget.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 import 'package:evently/base.dart';
-
 import 'package:evently/login/login_connector.dart';
 import 'package:evently/login/login_view_model.dart';
 import 'package:evently/providers/AuthProvider.dart';
@@ -21,12 +21,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
     implements LoginConnector {
   var emailController = TextEditingController();
-
   var passwordController = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     viewModel.connector = this;
   }
@@ -58,7 +56,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Email",
+                    labelText: "email".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -87,13 +85,12 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  obscuringCharacter: "#",
                   style: Theme.of(context)
                       .textTheme
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: "password".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -121,7 +118,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                   height: 24,
                 ),
                 Text(
-                  "Forget Password ?",
+                  "forgetPassword".tr(),
                   textAlign: TextAlign.end,
                   style: Theme.of(context)
                       .textTheme
@@ -142,7 +139,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                           borderRadius: BorderRadius.circular(12)),
                       backgroundColor: Theme.of(context).primaryColor),
                   child: Text(
-                    "Login",
+                    "login".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
@@ -160,18 +157,18 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                       textAlign: TextAlign.center,
                       TextSpan(children: [
                         TextSpan(
-                            text: "Don’t Have Account ? ",
+                            text: "don'tHaveAccount".tr(),
                             style: Theme.of(context).textTheme.titleSmall),
                         TextSpan(
                           onEnter: (event) {},
-                          text: "Create Account",
+                          text: "createAccount".tr(),
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 18,
-                                  decoration: TextDecoration.underline),
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 18,
+                              decoration: TextDecoration.underline),
                         ),
                       ])),
                 ),
@@ -189,7 +186,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                       ),
                     ),
                     Text(
-                      "OR",
+                      "or".tr(),
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     Expanded(
@@ -201,7 +198,45 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                       ),
                     ),
                   ],
-                )
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 1,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(16),
+                    ),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      viewModel.loginWithGoogle();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/icons/google.png",
+                          width: 26,
+                          height: 25.67,
+                        ),
+                        const SizedBox(width: 10),
+                        Text(
+                          "loginWithGoogle".tr(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(color: Theme.of(context).primaryColor),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                const LanguageToggleWidget(),
               ],
             ),
           ),
@@ -220,7 +255,59 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
     Navigator.pushNamedAndRemoveUntil(
       context,
       HomeScreen.routeName,
-      (route) => false,
+          (route) => false,
+    );
+  }
+
+  // إضافة method لتحديث الـ UserProvider
+  @override
+  Future<void> updateUserProvider() async {
+    var authProvider = Provider.of<UserProvider>(context, listen: false);
+    await authProvider.initUser();
+  }
+
+  @override
+  showLoading({String? message}) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        content: Center(child: CircularProgressIndicator()),
+      ),
+    );
+  }
+
+  @override
+  void showError({String? message}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message ?? 'Error occurred')),
+    );
+  }
+
+  @override
+  hideLoading() {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+  }
+
+  @override
+  showSuccess() {
+    if (Navigator.canPop(context)) Navigator.pop(context);
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Successfully"),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("OK"))
+        ],
+      ),
     );
   }
 }

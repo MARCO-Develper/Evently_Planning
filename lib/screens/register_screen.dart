@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:evently/widgets/language_toggle_widget.dart';
 import 'package:flutter/material.dart';
 import '../firebase/firebase_manager.dart';
 import '../login/login_screen.dart';
@@ -19,7 +21,7 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Register",
+          "register".tr(),
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
@@ -35,14 +37,12 @@ class RegisterScreen extends StatelessWidget {
                   "assets/images/logo.png",
                   height: 150,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: nameController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Name is Required";
+                      return "name".tr() + " " + "is Required"; // ممكن تضيف مفتاح ترجمة لاحقًا
                     }
                     return null;
                   },
@@ -51,7 +51,7 @@ class RegisterScreen extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Name",
+                    labelText: "name".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -74,23 +74,20 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: emailController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Email is Required";
+                      return "email".tr() + " " + "is Required";
                     }
                     final bool emailValid = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[gmail]+\.[com]+")
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[gmail]+\.[com]+")
                         .hasMatch(value);
 
                     if (!emailValid) {
-                      return "Email is Not valid";
+                      return "email".tr() + " " + "is Not valid";
                     }
-
                     return null;
                   },
                   style: Theme.of(context)
@@ -98,7 +95,7 @@ class RegisterScreen extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Email",
+                    labelText: "email".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -121,17 +118,15 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: passwordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Password is Required";
+                      return "password".tr() + " " + "is Required";
                     }
                     if (value.length < 6) {
-                      return "Should be At least 6 Char";
+                      return "Should be At least 6 Char"; // ممكن تضيف ترجمة هنا برضه
                     }
                     return null;
                   },
@@ -142,7 +137,7 @@ class RegisterScreen extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    labelText: "password".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -166,20 +161,18 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 TextFormField(
                   controller: rePasswordController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "RePassword is Required";
+                      return "rePassword".tr() + " " + "is Required";
                     }
                     if (value.length < 6) {
                       return "Should be At least 6 Char";
                     }
                     if (passwordController.text != value) {
-                      return " Password not matched";
+                      return "Password not matched"; // ممكن تضيف ترجمة هنا كمان
                     }
                     return null;
                   },
@@ -189,7 +182,7 @@ class RegisterScreen extends StatelessWidget {
                       .titleSmall!
                       .copyWith(color: Theme.of(context).focusColor),
                   decoration: InputDecoration(
-                    labelText: "Re Password",
+                    labelText: "rePassword".tr(),
                     labelStyle: Theme.of(context)
                         .textTheme
                         .titleSmall!
@@ -213,46 +206,44 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       FirebaseManager.createUser(emailController.text,
                           passwordController.text, nameController.text, () {
-                        Navigator.pop(context);
+                            Navigator.pop(context);
 
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          LoginScreen.routeName,
-                          (route) => false,
-                        );
-                      }, (message) {
-                        Navigator.pop(context);
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: const Text("Something went wrong"),
-                            content: Text(message),
-                            actions: [
-                              ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("OK"))
-                            ],
-                          ),
-                        );
-                      }, () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => const AlertDialog(
-                            backgroundColor: Colors.transparent,
-                            title: Center(child: CircularProgressIndicator()),
-                          ),
-                        );
-                      });
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              LoginScreen.routeName,
+                                  (route) => false,
+                            );
+                          }, (message) {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text("Something went wrong"),
+                                content: Text(message),
+                                actions: [
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("OK".tr()))
+                                ],
+                              ),
+                            );
+                          }, () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const AlertDialog(
+                                backgroundColor: Colors.transparent,
+                                title: Center(child: CircularProgressIndicator()),
+                              ),
+                            );
+                          });
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -261,16 +252,14 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12)),
                       backgroundColor: Theme.of(context).primaryColor),
                   child: Text(
-                    "Register",
+                    "register".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium!
                         .copyWith(color: Colors.white),
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
+                const SizedBox(height: 24),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, LoginScreen.routeName);
@@ -279,20 +268,22 @@ class RegisterScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                       TextSpan(children: [
                         TextSpan(
-                            text: "I Have Account ? ",
+                            text: "iHaveAccount".tr() + " ",
                             style: Theme.of(context).textTheme.titleSmall),
                         TextSpan(
-                          text: "Login",
+                          text: "login".tr(),
                           style: Theme.of(context)
                               .textTheme
                               .titleSmall!
                               .copyWith(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: 18,
-                                  decoration: TextDecoration.underline),
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 18,
+                              decoration: TextDecoration.underline),
                         ),
                       ])),
                 ),
+                const SizedBox(height: 24),
+                const LanguageToggleWidget()
               ],
             ),
           ),

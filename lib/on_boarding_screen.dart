@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'login/login_screen.dart';
 
-
 class OnBoardingScreen extends StatelessWidget {
   static const String routeName = "OnBoardingScreen";
 
@@ -31,6 +30,7 @@ class OnBoardingScreen extends StatelessWidget {
       pageColor: Theme.of(context).scaffoldBackgroundColor,
       imageFlex: 3,
       imagePadding: EdgeInsets.zero,
+      contentMargin: const EdgeInsets.only(top: 0, bottom: 20),
     );
 
     return IntroductionScreen(
@@ -38,7 +38,6 @@ class OnBoardingScreen extends StatelessWidget {
       dotsFlex: 4,
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),
-
         activeSize: const Size(20.92, 8.0),
         activeColor: Theme.of(context).primaryColor,
         color: const Color(0xff1C1C1C),
@@ -106,7 +105,7 @@ class OnBoardingScreen extends StatelessWidget {
             ],
           ),
           footer: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: Text(
               "Dive into a world of events crafted to fit your unique interests. Whether you're into live music, art workshops, professional networking, or simply discovering new experiences, we have something for everyone. Our curated recommendations will help you explore, connect, and make the most of every opportunity around you.",
               textAlign: TextAlign.start,
@@ -132,7 +131,7 @@ class OnBoardingScreen extends StatelessWidget {
             ],
           ),
           footer: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: Text(
               "Take the hassle out of organizing events with our all-in-one planning tools. From setting up invites and managing RSVPs to scheduling reminders and coordinating details, we’ve got you covered. Plan with ease and focus on what matters – creating an unforgettable experience for you and your guests.",
               textAlign: TextAlign.start,
@@ -159,7 +158,7 @@ class OnBoardingScreen extends StatelessWidget {
             ],
           ),
           footer: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: Text(
               "Make every event memorable by sharing the experience with others. Our platform lets you invite friends, keep everyone in the loop, and celebrate moments together. Capture and share the excitement with your network, so you can relive the highlights and cherish the memories.",
               textAlign: TextAlign.start,

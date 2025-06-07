@@ -4,6 +4,7 @@ import 'package:evently/firebase_options.dart';
 import 'package:evently/login/login_screen.dart';
 import 'package:evently/on_boarding_screen.dart';
 import 'package:evently/providers/AuthProvider.dart';
+import 'package:evently/providers/language_provider.dart';
 import 'package:evently/providers/my_provider.dart';
 import 'package:evently/screens/create_event.dart';
 import 'package:evently/screens/home/home.dart';
@@ -21,26 +22,36 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
-  // Non-async exceptions
+  // Initialize Firebase first
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FirebaseFirestore.instance.settings = Settings(
+      persistenceEnabled: true,
+    );
+    print("Firebase initialized successfully");
+  } catch (e) {
+    print("Firebase initialization error: $e");
+  }
+
+  // Set up error handling
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
   };
-  // Async exceptions
+
   PlatformDispatcher.instance.onError = (error, stack) {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-
     return true;
   };
-  // await FirebaseFirestore.instance.enableNetwork();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MyProvider()),
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
       ],
       child: EasyLocalization(
         supportedLocales: const [Locale('en'), Locale('ar')],
@@ -57,11 +68,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<MyProvider>(context);
-    var authProvider = Provider.of<UserProvider>(context);
+    final provider = Provider.of<MyProvider>(context);
+    final authProvider = Provider.of<UserProvider>(context);
 
-    BaseTheme lightTheme = LightTheme();
-    BaseTheme darkTheme = DarkTheme();
+    // Initialize user if logged in
+    if (authProvider.currentUser != null && authProvider.userModel == null) {
+      authProvider.initUser();
+    }
+
+    final BaseTheme lightTheme = LightTheme();
+    final BaseTheme darkTheme = DarkTheme();
+
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -70,17 +87,26 @@ class MyApp extends StatelessWidget {
       darkTheme: darkTheme.themeData,
       themeMode: provider.themeMode,
       debugShowCheckedModeBanner: false,
-      initialRoute: authProvider.currentUser != null
-          ? HomeScreen.routeName
-          : IntroductionScreen.routeName,
-      routes: {
-        OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
-        IntroductionScreen.routeName: (context) => const IntroductionScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        RegisterScreen.routeName: (context) => RegisterScreen(),
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        CreateEvent.routeName: (context) => CreateEvent(),
-      },
+      initialRoute: _getInitialRoute(authProvider),
+      routes: _getAppRoutes(),
     );
+  }
+
+  String _getInitialRoute(UserProvider authProvider) {
+    if (authProvider.currentUser != null) {
+      return HomeScreen.routeName;
+    }
+    return IntroductionScreen.routeName;
+  }
+
+  Map<String, WidgetBuilder> _getAppRoutes() {
+    return {
+      IntroductionScreen.routeName: (context) => const IntroductionScreen(),
+      OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
+      LoginScreen.routeName: (context) => const LoginScreen(),
+      RegisterScreen.routeName: (context) => RegisterScreen(),
+      HomeScreen.routeName: (context) => const HomeScreen(),
+      CreateEvent.routeName: (context) => CreateEvent(),
+    };
   }
 }

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:evently/firebase/firebase_manager.dart';
 import 'package:evently/models/task_model.dart';
 import 'package:evently/providers/AuthProvider.dart';
 import 'package:evently/screens/home/tabs/home_tab/event_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
@@ -33,7 +33,6 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<UserProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -50,30 +49,13 @@ class _HomeTabState extends State<HomeTab> {
                   .titleSmall!
                   .copyWith(fontSize: 14, color: Colors.white),
             ),
-            Consumer<UserProvider>(
-              builder: (context, authProvider, child) {
-                final name = authProvider.userModel?.name;
-                return name != null
-                    ? Text(
-                  name,
-                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            Text(
+              "${authProvider.userModel?.name}",
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Colors.white,
                     fontSize: 24,
                   ),
-                )
-                    : const SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: Colors.white,
-                  ),
-                );
-
-              },
             ),
-
-
           ],
         ),
         actions: [
@@ -96,16 +78,20 @@ class _HomeTabState extends State<HomeTab> {
           ),
         ],
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24))),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+        ),
         bottom: AppBar(
           centerTitle: false,
           leadingWidth: 0,
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24))),
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+          ),
           toolbarHeight: 120,
           leading: const SizedBox(),
           backgroundColor: Theme.of(context).primaryColor,
@@ -130,7 +116,7 @@ class _HomeTabState extends State<HomeTab> {
               const SizedBox(
                 height: 6,
               ),
-              SizedBox(
+              Container(
                 height: 40,
                 child: ListView.separated(
                   separatorBuilder: (context, index) => const SizedBox(
@@ -202,42 +188,3 @@ class _HomeTabState extends State<HomeTab> {
     );
   }
 }
-
-// SafeArea(
-// child: Column(
-// children: [
-// Container(
-// padding: EdgeInsets.symmetric(horizontal: 16),
-// color: Theme.of(context).primaryColor,
-// child: Row(
-// mainAxisAlignment: MainAxisAlignment.spaceBetween,
-// children: [
-
-// Row(
-// children: [
-
-// SizedBox(
-// width: 8,
-// ),
-// Container(
-// margin: EdgeInsets.all(8),
-// padding: EdgeInsets.symmetric(horizontal: 4),
-// decoration: BoxDecoration(
-// color: Colors.white,
-// borderRadius: BorderRadius.circular(8)),
-// child: Text(
-// "EN",
-// style: Theme.of(context)
-//     .textTheme
-//     .titleMedium!
-//     .copyWith(color: Theme.of(context).primaryColor),
-// ),
-// ),
-// ],
-// )
-// ],
-// ),
-// )
-// ],
-// ),
-// );

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../models/task_model.dart';
 import '../models/userModel.dart';
 
@@ -64,7 +65,6 @@ class FirebaseManager {
     }
   }
 
-
   static Stream<QuerySnapshot<TaskModel>> getFavoriteTasks() {
     var collection = getTasksCollection();
     return collection
@@ -73,7 +73,6 @@ class FirebaseManager {
         .orderBy("date")
         .snapshots();
   }
-
 
   // static Future<UserModel?> readUserData(String uid) async {
   //   DocumentSnapshot<Map<String, dynamic>> doc =
@@ -95,7 +94,6 @@ class FirebaseManager {
     return updateTask(task);
   }
 
-
   static Future<void> deleteTask(String id) {
     var collection = getTasksCollection();
     return collection.doc(id).delete();
@@ -109,18 +107,20 @@ class FirebaseManager {
   static Future<void> createUser(String email, String password, String name,
       Function onSuccess, Function onError, Function onLoading) async {
     try {
-      //
       onLoading();
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
+      // تأكد من حفظ الاسم بشكل صحيح
       UserModel model = UserModel(
-          id: credential.user!.uid,
-          email: email,
-          name: name,
-          createdAt: DateTime.now().millisecondsSinceEpoch);
+        id: credential.user!.uid,
+        email: email,
+        name: name, // هذا هو الجزء المهم
+        createdAt: DateTime.now().millisecondsSinceEpoch,
+      );
       await addUser(model);
 
       credential.user!.sendEmailVerification();
@@ -155,6 +155,24 @@ class FirebaseManager {
     } on FirebaseAuthException {
       onError("Email or password is not valid");
     }
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   static Future<void> logOUt() {

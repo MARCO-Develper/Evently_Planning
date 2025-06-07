@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class BaseConnector {
   showLoading({String? message});
 
+  hideLoading();
+
   showError({String? message});
 
   showSuccess();
