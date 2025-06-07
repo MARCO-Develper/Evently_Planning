@@ -37,27 +37,84 @@ class _HomeScreenState extends State<HomeScreen> {
             selectedIndex = value;
           });
         },
-        items: const [
+        type: BottomNavigationBarType.fixed,
+        items: [
           BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage("assets/images/icons/Home 2.png"),size: 24,),
-              activeIcon:
-              ImageIcon(AssetImage("assets/images/icons/Home 1.png"),size: 24,),
-              label: "Home"),
+            icon: Padding(
+              padding: EdgeInsets.only(
+                top: selectedIndex == 0 ? 4 : 0,
+              ),
+              child: const ImageIcon(
+                AssetImage("assets/images/icons/Home 2.png"),
+                size: 24,
+              ),
+            ),
+            activeIcon: const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: ImageIcon(
+                AssetImage("assets/images/icons/Home 1.png"),
+                size: 24,
+              ),
+            ),
+            label: "Home",
+          ),
           BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage("assets/images/icons/Map_Pin.png"),size: 24,),
-              activeIcon:
-              ImageIcon(AssetImage("assets/images/icons/Map_Pin2.png"),size: 24,),
-              label: "Map"),
+            icon: Padding(
+              padding: EdgeInsets.only(
+                top: selectedIndex == 1 ? 4 : 0,
+              ),
+              child: const ImageIcon(
+                AssetImage("assets/images/icons/Map_Pin.png"),
+                size: 24,
+              ),
+            ),
+            activeIcon: const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: ImageIcon(
+                AssetImage("assets/images/icons/Map_Pin2.png"),
+                size: 24,
+              ),
+            ),
+            label: "Map",
+          ),
           BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage("assets/images/icons/Heart.png"),size: 24,),
-              activeIcon:
-              ImageIcon(AssetImage("assets/images/icons/Heart2.png"),size: 24,),
-              label: "Love"),
+            icon: Padding(
+              padding: EdgeInsets.only(
+                top: selectedIndex == 2 ? 4 : 0,
+              ),
+              child: const ImageIcon(
+                AssetImage("assets/images/icons/Heart.png"),
+                size: 24,
+              ),
+            ),
+            activeIcon: const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: ImageIcon(
+                AssetImage("assets/images/icons/Heart2.png"),
+                size: 24,
+              ),
+            ),
+            label: "Love",
+          ),
           BottomNavigationBarItem(
-              icon: ImageIcon(AssetImage("assets/images/icons/User_01.png"),size: 24,),
-              activeIcon:
-                  ImageIcon(AssetImage("assets/images/icons/User_02.png"),size: 24,),
-              label: "Profile"),
+            icon: Padding(
+              padding: EdgeInsets.only(
+                top: selectedIndex == 3 ? 4 : 0,
+              ),
+              child: const ImageIcon(
+                AssetImage("assets/images/icons/User_01.png"),
+                size: 24,
+              ),
+            ),
+            activeIcon: const Padding(
+              padding: EdgeInsets.only(bottom: 4),
+              child: ImageIcon(
+                AssetImage("assets/images/icons/User_02.png"),
+                size: 24,
+              ),
+            ),
+            label: "Profile",
+          ),
         ],
       ),
       body: tabs[selectedIndex],

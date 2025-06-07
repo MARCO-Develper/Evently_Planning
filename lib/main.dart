@@ -18,7 +18,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -77,9 +76,9 @@ class MyApp extends StatelessWidget {
       routes: {
         OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
         IntroductionScreen.routeName: (context) => const IntroductionScreen(),
-        LoginScreen.routeName: (context) => LoginScreen(),
+        LoginScreen.routeName: (context) => const LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
-        HomeScreen.routeName: (context) => HomeScreen(),
+        HomeScreen.routeName: (context) => const HomeScreen(),
         CreateEvent.routeName: (context) => CreateEvent(),
       },
     );
