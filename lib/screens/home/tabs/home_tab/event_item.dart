@@ -1,7 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently/firebase/firebase_manager.dart';
+import 'package:evently/models/task_model.dart';
 import 'package:flutter/material.dart';
-import '../../../../firebase/firebase_manager.dart';
-import '../../../../models/task_model.dart';
+
 import 'edit_task_screen.dart';
 
 class EventItem extends StatelessWidget {
@@ -29,9 +30,9 @@ class EventItem extends StatelessWidget {
                     )),
                 Container(
                   margin:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(18)),
@@ -68,11 +69,20 @@ class EventItem extends StatelessWidget {
                               color: Colors.red,
                             )),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Icon(
-                          Icons.favorite_rounded,
-                          color: Colors.deepPurple,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: InkWell(
+                          onTap: () {
+                            FirebaseManager.toggleFavorite(model);
+                          },
+                          child: Icon(
+                            model.isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: model.isFavorite
+                                ? Theme.of(context).primaryColor
+                                : Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                     ],

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 import 'package:provider/provider.dart';
-import 'package:todo_c13_friday/base.dart';
-import 'package:todo_c13_friday/firebase/firebase_manager.dart';
-import 'package:todo_c13_friday/login/login_connector.dart';
-import 'package:todo_c13_friday/login/login_view_model.dart';
-import 'package:todo_c13_friday/providers/AuthProvider.dart';
-import 'package:todo_c13_friday/screens/home/home.dart';
-import 'package:todo_c13_friday/screens/register_screen.dart';
+import 'package:evently/base.dart';
+
+import 'package:evently/login/login_connector.dart';
+import 'package:evently/login/login_view_model.dart';
+import 'package:evently/providers/AuthProvider.dart';
+import 'package:evently/screens/home/home.dart';
+import 'package:evently/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "loginScreen";
 
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -49,7 +48,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                   "assets/images/logo.png",
                   height: 150,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextField(
@@ -64,7 +63,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -82,7 +81,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextField(
@@ -99,8 +98,8 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: const Icon(Icons.remove_red_eye_outlined),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -118,7 +117,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Text(
@@ -129,7 +128,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                       .titleSmall!
                       .copyWith(color: Theme.of(context).primaryColor),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 ElevatedButton(
@@ -138,7 +137,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                         emailController.text, passwordController.text);
                   },
                   style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       backgroundColor: Theme.of(context).primaryColor),
@@ -150,7 +149,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                         .copyWith(color: Colors.white),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 InkWell(
@@ -176,7 +175,7 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
                         ),
                       ])),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Row(
@@ -218,7 +217,6 @@ class _LoginScreenState extends BaseView<LoginScreen, LoginViewModel>
 
   @override
   void goToHome() {
-
     Navigator.pushNamedAndRemoveUntil(
       context,
       HomeScreen.routeName,

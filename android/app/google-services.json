@@ -1,21 +1,59 @@
 {
   "project_info": {
-    "project_number": "881403752820",
-    "project_id": "todo-c13-friday",
-    "storage_bucket": "todo-c13-friday.firebasestorage.app"
+    "project_number": "1064093168221",
+    "project_id": "evently-planning",
+    "storage_bucket": "evently-planning.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:881403752820:android:eb7e5b97224743a0ca7c21",
+        "mobilesdk_app_id": "1:1064093168221:android:803ffcad9bb80da99653b4",
         "android_client_info": {
-          "package_name": "com.example.todo_c13_friday"
+          "package_name": "com.marco.evently"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDiB-a037WxUE9VI7L0q3d1l3l3u7BpmEs"
+          "current_key": "AIzaSyCHz8NpBBUOSZ_mh3rBARr_NWEeSRlLL7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064093168221:android:3a26f877fa576f269653b4",
+        "android_client_info": {
+          "package_name": "com.example.evently_planning"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHz8NpBBUOSZ_mh3rBARr_NWEeSRlLL7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064093168221:android:6817c6b54f7094999653b4",
+        "android_client_info": {
+          "package_name": "com.marco.evently"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHz8NpBBUOSZ_mh3rBARr_NWEeSRlLL7M"
         }
       ],
       "services": {

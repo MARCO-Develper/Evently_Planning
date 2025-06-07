@@ -1,16 +1,17 @@
+import 'package:evently/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo_c13_friday/theme/theme.dart';
+
 
 class DarkTheme extends BaseTheme {
   @override
-  Color get backgroundColor => Color(0xFF101127);
+  Color get backgroundColor => const Color(0xFF101127);
 
   @override
-  Color get primaryColor => Color(0xFF5669FF);
+  Color get primaryColor => const Color(0xFF5669FF);
 
   @override
-  Color get textColor => Color(0xFFF4EBDC);
+  Color get textColor => const Color(0xFFF4EBDC);
 
   @override
   ThemeData get themeData => ThemeData(
@@ -21,7 +22,7 @@ class DarkTheme extends BaseTheme {
 
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(35),
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
                 color: Colors.white,
                 width: 4
             )

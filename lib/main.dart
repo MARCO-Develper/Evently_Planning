@@ -1,21 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:evently/firebase_options.dart';
+import 'package:evently/login/login_screen.dart';
+import 'package:evently/on_boarding_screen.dart';
+import 'package:evently/providers/AuthProvider.dart';
+import 'package:evently/providers/my_provider.dart';
+import 'package:evently/screens/create_event.dart';
+import 'package:evently/screens/home/home.dart';
+import 'package:evently/screens/introduction_screen.dart';
+import 'package:evently/screens/register_screen.dart';
+import 'package:evently/theme/dark_theme.dart';
+import 'package:evently/theme/light_theme.dart';
+import 'package:evently/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart';
-import 'login/login_screen.dart';
-import 'providers/AuthProvider.dart';
-import 'providers/my_provider.dart';
-import 'screens/create_event.dart';
-import 'screens/home/home.dart';
-import 'screens/introduction_screen.dart';
-import 'screens/on_boarding_screen.dart';
-import 'screens/register_screen.dart';
-import 'theme/dark_theme.dart';
-import 'theme/light_theme.dart';
-import 'theme/theme.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

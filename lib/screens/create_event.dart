@@ -42,13 +42,13 @@ class CreateEvent extends StatelessWidget {
                       height: 220,
                       fit: BoxFit.fill,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 SizedBox(
                   height: 40,
                   child: ListView.separated(
-                    separatorBuilder: (context, index) => SizedBox(
+                    separatorBuilder: (context, index) => const SizedBox(
                       width: 16,
                     ),
                     scrollDirection: Axis.horizontal,
@@ -65,7 +65,7 @@ class CreateEvent extends StatelessWidget {
                     itemCount: provider.eventCategories.length,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 TextField(
@@ -80,7 +80,7 @@ class CreateEvent extends StatelessWidget {
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.edit_note),
+                    prefixIcon: const Icon(Icons.edit_note),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -98,7 +98,7 @@ class CreateEvent extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextField(
@@ -131,7 +131,7 @@ class CreateEvent extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 Row(
@@ -150,15 +150,15 @@ class CreateEvent extends StatelessWidget {
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate:
-                                DateTime.now().subtract(Duration(days: 365)),
-                            lastDate: DateTime.now().add(Duration(days: 365)));
+                                DateTime.now().subtract(const Duration(days: 365)),
+                            lastDate: DateTime.now().add(const Duration(days: 365)));
 
                         if (date != null) {
                           provider.changeDate(date);
                         }
                       },
                       child: Text(
-                        "${provider.selectedDate.toString().substring(0, 10)}",
+                        provider.selectedDate.toString().substring(0, 10),
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
@@ -167,10 +167,10 @@ class CreateEvent extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
@@ -190,13 +190,13 @@ class CreateEvent extends StatelessWidget {
                           description: descriptionController.text,
                           category: provider.selectedCategoryName,
                           date: provider.selectedDate.millisecondsSinceEpoch);
-                      await Future.delayed(Duration(seconds: 5));
+                      await Future.delayed(const Duration(seconds: 5));
                       FirebaseManager.addEvent(model);
                       Navigator.pop(context);
                       Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12)),
                         backgroundColor: Theme.of(context).primaryColor),

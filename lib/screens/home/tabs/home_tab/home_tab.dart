@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_c13_friday/firebase/firebase_manager.dart';
-import 'package:todo_c13_friday/models/task_model.dart';
-import 'package:todo_c13_friday/providers/AuthProvider.dart';
-import 'package:todo_c13_friday/screens/home/tabs/home_tab/event_item.dart';
+import 'package:evently/firebase/firebase_manager.dart';
+import 'package:evently/models/task_model.dart';
+import 'package:evently/providers/AuthProvider.dart';
+import 'package:evently/screens/home/tabs/home_tab/event_item.dart';
 
 class HomeTab extends StatefulWidget {
-  HomeTab({super.key});
+  const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
@@ -33,11 +33,12 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     var authProvider = Provider.of<UserProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
         leadingWidth: 0,
-        leading: SizedBox(),
+        leading: const SizedBox(),
         backgroundColor: Theme.of(context).primaryColor,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,23 +50,40 @@ class _HomeTabState extends State<HomeTab> {
                   .titleSmall!
                   .copyWith(fontSize: 14, color: Colors.white),
             ),
-            Text(
-              "${authProvider.userModel?.name}",
-              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+            Consumer<UserProvider>(
+              builder: (context, authProvider, child) {
+                final name = authProvider.userModel?.name;
+                return name != null
+                    ? Text(
+                  name,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
                     color: Colors.white,
                     fontSize: 24,
                   ),
+                )
+                    : const SizedBox(
+                  height: 20,
+                  width: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: Colors.white,
+                  ),
+                );
+
+              },
             ),
+
+
           ],
         ),
         actions: [
-          Icon(
+          const Icon(
             Icons.sunny,
             color: Colors.white,
           ),
           Container(
-            margin: EdgeInsets.all(8),
-            padding: EdgeInsets.symmetric(horizontal: 4),
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.symmetric(horizontal: 4),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(8)),
             child: Text(
@@ -77,26 +95,26 @@ class _HomeTabState extends State<HomeTab> {
             ),
           ),
         ],
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(24),
                 bottomRight: Radius.circular(24))),
         bottom: AppBar(
           centerTitle: false,
           leadingWidth: 0,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(24),
                   bottomRight: Radius.circular(24))),
           toolbarHeight: 120,
-          leading: SizedBox(),
+          leading: const SizedBox(),
           backgroundColor: Theme.of(context).primaryColor,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.pin_drop,
                     color: Colors.white,
                   ),
@@ -109,13 +127,13 @@ class _HomeTabState extends State<HomeTab> {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 6,
               ),
-              Container(
+              SizedBox(
                 height: 40,
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     width: 16,
                   ),
                   scrollDirection: Axis.horizontal,
@@ -126,7 +144,7 @@ class _HomeTabState extends State<HomeTab> {
                         setState(() {});
                       },
                       child: Container(
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             color: selectedCategory == index
                                 ? Colors.white
@@ -159,16 +177,16 @@ class _HomeTabState extends State<HomeTab> {
         stream: FirebaseManager.getEvents(eventCategories[selectedCategory]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
                 child: Text("Something went wrong , please try again"));
           }
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView.separated(
-              separatorBuilder: (context, i) => SizedBox(
+              separatorBuilder: (context, i) => const SizedBox(
                 height: 24,
               ),
               itemBuilder: (context, index) {

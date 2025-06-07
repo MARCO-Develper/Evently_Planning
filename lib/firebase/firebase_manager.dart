@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/task_model.dart';
 import '../models/userModel.dart';
 
-
 class FirebaseManager {
   static CollectionReference<TaskModel> getTasksCollection() {
     return FirebaseFirestore.instance
@@ -60,15 +59,42 @@ class FirebaseManager {
           )
           .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
           .where("category", isEqualTo: categoryName)
+          .where("isFavorite", isEqualTo: true)
           .snapshots();
     }
   }
+
+
+  static Stream<QuerySnapshot<TaskModel>> getFavoriteTasks() {
+    var collection = getTasksCollection();
+    return collection
+        .where("userId", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .where("isFavorite", isEqualTo: true)
+        .orderBy("date")
+        .snapshots();
+  }
+
+
+  // static Future<UserModel?> readUserData(String uid) async {
+  //   DocumentSnapshot<Map<String, dynamic>> doc =
+  //       await FirebaseFirestore.instance.collection("Users").doc(uid).get();
+  //
+  //   if (!doc.exists || doc.data() == null) return null;
+  //
+  //   return UserModel.fromJson(doc.data()!);
+  // }
 
   static Future<UserModel?> readUserData(String id) async {
     var collection = getUserCollection();
     DocumentSnapshot<UserModel> snapShot = await collection.doc(id).get();
     return snapShot.data();
   }
+
+  static Future<void> toggleFavorite(TaskModel task) {
+    task.isFavorite = !task.isFavorite;
+    return updateTask(task);
+  }
+
 
   static Future<void> deleteTask(String id) {
     var collection = getTasksCollection();
@@ -126,7 +152,7 @@ class FirebaseManager {
       // } else {
       //   onError("Email is Not verified , please Check your mail and verify");
       // }
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       onError("Email or password is not valid");
     }
   }

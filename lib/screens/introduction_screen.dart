@@ -77,7 +77,7 @@ class IntroductionScreen extends StatelessWidget {
                       Theme.of(context).primaryColor,
                       Theme.of(context).secondaryHeaderColor
                     ],
-                    [Colors.yellow, Colors.orange]
+                    const [Colors.yellow, Colors.orange]
                   ],
                   animate: true,
                   // with just animate set to true, default curve = Curves.easeIn
@@ -117,7 +117,7 @@ class IntroductionScreen extends StatelessWidget {
                   inactiveBgColor: Colors.grey,
                   inactiveFgColor: Colors.white,
                   totalSwitches: 2,
-                  icons: [
+                  icons: const [
                     FontAwesomeIcons.lightbulb,
                     FontAwesomeIcons.moon,
                   ],
@@ -127,7 +127,7 @@ class IntroductionScreen extends StatelessWidget {
                       Theme.of(context).primaryColor,
                       Theme.of(context).secondaryHeaderColor
                     ],
-                    [Colors.yellow, Colors.orange]
+                    const [Colors.yellow, Colors.orange]
                   ],
                   animate: true,
                   // with just animate set to true, default curve = Curves.easeIn

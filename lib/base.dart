@@ -31,14 +31,14 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Something went wrong"),
+        title: const Text("Something went wrong"),
         content: Text(message ?? ""),
         actions: [
           ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("OK"))
+              child: const Text("OK"))
         ],
       ),
     );
@@ -48,7 +48,7 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
   showLoading({String? message}) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => const AlertDialog(
         backgroundColor: Colors.transparent,
         title: Center(child: CircularProgressIndicator()),
       ),
@@ -61,13 +61,13 @@ abstract class BaseView<T extends StatefulWidget, VM extends BaseViewModel>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("Successfully"),
+        title: const Text("Successfully"),
         actions: [
           ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("OK"))
+              child: const Text("OK"))
         ],
       ),
     );

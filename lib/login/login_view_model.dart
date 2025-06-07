@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_c13_friday/base.dart';
-import 'package:todo_c13_friday/login/login_connector.dart';
+import 'package:evently/base.dart';
+import 'package:evently/login/login_connector.dart';
 
 class LoginViewModel extends BaseViewModel<LoginConnector> {
   Future<void> login(

@@ -35,7 +35,7 @@ class RegisterScreen extends StatelessWidget {
                   "assets/images/logo.png",
                   height: 150,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextFormField(
@@ -56,7 +56,7 @@ class RegisterScreen extends StatelessWidget {
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.person),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -74,7 +74,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextFormField(
@@ -103,7 +103,7 @@ class RegisterScreen extends StatelessWidget {
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.email),
+                    prefixIcon: const Icon(Icons.email),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -121,7 +121,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextFormField(
@@ -147,8 +147,8 @@ class RegisterScreen extends StatelessWidget {
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: const Icon(Icons.remove_red_eye_outlined),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -166,7 +166,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 TextFormField(
@@ -194,8 +194,8 @@ class RegisterScreen extends StatelessWidget {
                         .textTheme
                         .titleSmall!
                         .copyWith(color: Theme.of(context).focusColor),
-                    prefixIcon: Icon(Icons.lock),
-                    suffixIcon: Icon(Icons.remove_red_eye_outlined),
+                    prefixIcon: const Icon(Icons.lock),
+                    suffixIcon: const Icon(Icons.remove_red_eye_outlined),
                     border: OutlineInputBorder(
                       borderSide: BorderSide(
                           width: 2, color: Theme.of(context).focusColor),
@@ -213,7 +213,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 ElevatedButton(
@@ -233,21 +233,21 @@ class RegisterScreen extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text("Something went wrong"),
+                            title: const Text("Something went wrong"),
                             content: Text(message),
                             actions: [
                               ElevatedButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("OK"))
+                                  child: const Text("OK"))
                             ],
                           ),
                         );
                       }, () {
                         showDialog(
                           context: context,
-                          builder: (context) => AlertDialog(
+                          builder: (context) => const AlertDialog(
                             backgroundColor: Colors.transparent,
                             title: Center(child: CircularProgressIndicator()),
                           ),
@@ -256,7 +256,7 @@ class RegisterScreen extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12)),
                       backgroundColor: Theme.of(context).primaryColor),
@@ -268,7 +268,7 @@ class RegisterScreen extends StatelessWidget {
                         .copyWith(color: Colors.white),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 InkWell(

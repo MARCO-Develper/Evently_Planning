@@ -1,14 +1,14 @@
+import 'package:evently/screens/create_event.dart';
+import 'package:evently/screens/home/tabs/home_tab/home_tab.dart';
+import 'package:evently/screens/home/tabs/favorite_tab.dart';
+import 'package:evently/screens/home/tabs/map_tab.dart';
+import 'package:evently/screens/home/tabs/profile_tab.dart';
 import 'package:flutter/material.dart';
-import '../create_event.dart';
-import 'tabs/home_tab/home_tab.dart';
-import 'tabs/love_tab.dart';
-import 'tabs/map_tab.dart';
-import 'tabs/profile_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -33,16 +33,31 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
         onTap: (value) {
-          selectedIndex = value;
-          setState(() {});
+          setState(() {
+            selectedIndex = value;
+          });
         },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: ""),
           BottomNavigationBarItem(
-              icon: Icon(Icons.heart_broken_outlined), label: ""),
+              icon: ImageIcon(AssetImage("assets/images/icons/Home 2.png"),size: 24,),
+              activeIcon:
+              ImageIcon(AssetImage("assets/images/icons/Home 1.png"),size: 24,),
+              label: "Home"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person_2_outlined), label: ""),
+              icon: ImageIcon(AssetImage("assets/images/icons/Map_Pin.png"),size: 24,),
+              activeIcon:
+              ImageIcon(AssetImage("assets/images/icons/Map_Pin2.png"),size: 24,),
+              label: "Map"),
+          BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/images/icons/Heart.png"),size: 24,),
+              activeIcon:
+              ImageIcon(AssetImage("assets/images/icons/Heart2.png"),size: 24,),
+              label: "Love"),
+          BottomNavigationBarItem(
+              icon: ImageIcon(AssetImage("assets/images/icons/User_01.png"),size: 24,),
+              activeIcon:
+                  ImageIcon(AssetImage("assets/images/icons/User_02.png"),size: 24,),
+              label: "Profile"),
         ],
       ),
       body: tabs[selectedIndex],
@@ -50,9 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<Widget> tabs = [
-    HomeTab(),
+    const HomeTab(),
     const MapTab(),
-    const LoveTab(),
+    const FavoriteTab(),
     const ProfileTab(),
   ];
 }

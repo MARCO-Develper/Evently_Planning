@@ -1,10 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.marco.evently">
     <application
-        android:label="todo_c13_friday"
-        android:name="${applicationName}"
+        android:label="evently"
         android:icon="@mipmap/ic_launcher">
         <activity
-            android:name=".MainActivity"
+            android:name="com.marco.evently.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:taskAffinity=""

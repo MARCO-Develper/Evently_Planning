@@ -10,7 +10,7 @@ class CategoryEventItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
           border: Border.all(color: Theme.of(context).primaryColor),
           color:

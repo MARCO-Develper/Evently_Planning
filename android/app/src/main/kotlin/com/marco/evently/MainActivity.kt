@@ -1,4 +1,4 @@
-package com.example.todo_c13_friday
+package com.marco.evently
 
 import io.flutter.embedding.android.FlutterActivity
 

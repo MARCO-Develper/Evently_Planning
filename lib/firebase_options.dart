@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDiB-a037WxUE9VI7L0q3d1l3l3u7BpmEs',
-    appId: '1:881403752820:android:eb7e5b97224743a0ca7c21',
-    messagingSenderId: '881403752820',
-    projectId: 'todo-c13-friday',
-    storageBucket: 'todo-c13-friday.firebasestorage.app',
+    apiKey: 'AIzaSyCHz8NpBBUOSZ_mh3rBARr_NWEeSRlLL7M',
+    appId: '1:1064093168221:android:6817c6b54f7094999653b4',
+    messagingSenderId: '1064093168221',
+    projectId: 'evently-planning',
+    storageBucket: 'evently-planning.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAg5qQd7MWLSf4EFr0L-toUpjYzCvPmPac',
-    appId: '1:881403752820:ios:b9ee2eadc54c2894ca7c21',
-    messagingSenderId: '881403752820',
-    projectId: 'todo-c13-friday',
-    storageBucket: 'todo-c13-friday.firebasestorage.app',
+    apiKey: 'AIzaSyAmWIxJcdCvDOz-ONY2_wOXybnh51g5h2I',
+    appId: '1:1064093168221:ios:368bbfa96cc8b01c9653b4',
+    messagingSenderId: '1064093168221',
+    projectId: 'evently-planning',
+    storageBucket: 'evently-planning.firebasestorage.app',
     iosBundleId: 'com.example.todoC13Friday',
   );
 }

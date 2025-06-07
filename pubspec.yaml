@@ -1,4 +1,4 @@
-name: todo_c13_friday
+name: evently
 description: "A new Flutter project."
 publish_to: 'none'
 
@@ -38,4 +38,5 @@ flutter:
   generate: true # Add this line
   assets:
     - assets/images/
+    - assets/images/icons/
     - assets/translations/

@@ -23,7 +23,7 @@ class ProfileTab extends StatelessWidget {
                 );
               });
             },
-            child: Text("Logout")),
+            child: const Text("Logout")),
       ),
     );
   }
